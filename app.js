@@ -140,7 +140,7 @@ app.post("/login", (req, res) => {
 	                        Code.findOneAndRemove({
                              code: req.body.code 
                                }).then( () => {
-                                console.log('code removed from db ..');
+                                console.log("code removed from db, don't use it again ..");
                                  res.redirect('/');
                                   });
                                    });
