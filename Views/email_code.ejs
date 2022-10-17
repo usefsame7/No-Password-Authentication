@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email-Code</title>
+    <style>
+         body {
+     background-color: antiquewhite;
+         font-family:Verdana, Geneva, Tahoma, sans-serif;
+   }
+ .code-box {
+     width: 250px;
+     height: 250px;
+     background: #1c2833;
+     color: white;
+     margin:  auto;
+     margin-top: 10%;
+     border-radius: 35px;
+ }
+ h1 {
+     text-align: center;
+     margin-top: -60px;
+     padding-top: 50px;
+ }
+
+ label {
+
+     font-size: 18px;
+     display: block;
+     margin-left: 20px;
+ }
+
+ input {
+
+     width: 80%;
+     margin: 0 0 20px 20px;
+ }
+
+ input[type="text"],
+ input[type="password"] {
+     border: none;
+     background: transparent;
+     border-bottom: 1px solid #fff;
+     height: 40px;
+     outline: none;
+     color: white;
+     font-size: 16px;
+ }
+
+ input[type="submit"] {
+     border: none;
+     outline: none;
+     height: 40px;
+     border-radius: 20px;
+     background: darkslateblue;
+     color: white;
+     font-size: 20px;
+     cursor: pointer;
+ }
+
+ input[type="submit"]:hover {
+     background: blueviolet;
+ }
+  a {
+    color: blueviolet;
+    padding-left: 50px;
+  } 
+    </style>
+</head>
+<body>
+       <div class="code-box">
+        <form action="/email-code" method="post">
+
+        <label>Email - Code</label>          
+          <input
+          type="String"
+          placeholder="Enter Your Code"
+          name="code"
+        />
+        <input type="submit" value="Login" />
+        <a href="/login">Send Code Again</a>
+              <%= messages.error %> 
+      </form>  
+       </div>  
+</body>
+</html>
