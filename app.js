@@ -83,11 +83,11 @@ app.post("/login", (req, res) => {
      service: 'gmail',
       auth: {
        user: '', // sender-email
-        pass: '', // generated pass of sender email
+        pass: '', // generated pass 
      },
   });
    mailOptions = {
-      from: 'sender-email',
+      from: '' // sender-email,
         to: req.body.email,
           subject: 'Login Code',
             text:  Math.floor ( Math.random () * (999999 - 100000) + 100000 ).toString()
@@ -114,8 +114,7 @@ app.post("/login", (req, res) => {
                new LocalStrategy({ usernameField: 'code', passwordField: 'code' }, async (code, password, done) => {
 
                   const user = await Code.findOne({ code: code });
-                  
-
+		       
                      if (!user || code !== user.code)  return done(null, false, { message: "incorrect code . please, check your code or resend it" });
 
                           return done(null, user);
@@ -135,15 +134,15 @@ app.post("/login", (req, res) => {
     app.post('/email-code', passport.authenticate('local', {
                 failureFlash: true,             
                   failureRedirect: '/email-code',
-                    }),
-                       (req, res) => {
+                      }),
+                             (req, res) => {
 	                        Code.findOneAndRemove({
-                             code: req.body.code 
-                               }).then( () => {
-                                console.log("code removed from db, don't use it again ..");
-                                 res.redirect('/');
-                                  });
-                                   });
+                                 code: req.body.code 
+                                  }).then( () => {
+                                   console.log("code removed from db, don't use it again ..");
+                                   res.redirect('/');
+                              });
+                           });
                                     
                   
     
