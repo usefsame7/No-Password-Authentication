@@ -82,12 +82,12 @@ app.post("/login", (req, res) => {
     const transporter = nodemailer.createTransport({
      service: 'gmail',
       auth: {
-       user: 'yousameh2006@gmail.com',
-        pass: 'wgcvicjalylloqkl',
+       user: '', // sender-email
+        pass: '', // generated pass of sender email
      },
   });
    mailOptions = {
-      from: 'yousameh2006@gmail.com',
+      from: 'sender-email',
         to: req.body.email,
           subject: 'Login Code',
             text:  Math.floor ( Math.random () * (999999 - 100000) + 100000 ).toString()
