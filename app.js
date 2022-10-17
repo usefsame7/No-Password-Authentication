@@ -87,7 +87,7 @@ app.post("/login", (req, res) => {
      },
   });
    mailOptions = {
-      from: '' // sender-email,
+      from: '', // sender-email,
         to: req.body.email,
           subject: 'Login Code',
             text:  Math.floor ( Math.random () * (999999 - 100000) + 100000 ).toString()
