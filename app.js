@@ -57,13 +57,6 @@ app.get("/logout", (req, res) => {
   res.render("log_out");
 });
 
-app.get("/number", (req, res) => {
-  res.render("numberSigning");
-});
-
-app.get("/phone-code", (req, res) => {
-  res.render("num_code");
-});
 
 app.get("/email-code", (req, res) => {
   res.render("email_code");
@@ -112,13 +105,9 @@ app.post("/login", (req, res) => {
       const passportConfig = () => {
              passport.use(
                new LocalStrategy({ usernameField: 'code', passwordField: 'code' }, async (code, password, done) => {
-
                   const user = await Code.findOne({ code: code });
-		       
                      if (!user || code !== user.code)  return done(null, false, { message: "incorrect code . please, check your code or resend it" });
-
                           return done(null, user);
-
                        }
                     ));
 
@@ -130,43 +119,40 @@ app.post("/login", (req, res) => {
        passportConfig();
 
        
-
     app.post('/email-code', passport.authenticate('local', {
                 failureFlash: true,             
                   failureRedirect: '/email-code',
-                      }),
-                             (req, res) => {
-	                        Code.findOneAndRemove({
-                                 code: req.body.code 
-                                  }).then( () => {
-                                   console.log("code removed from db, don't use it again ..");
-                                   res.redirect('/');
-                              });
-                           });
+             }),  (req, res) => {
+       Code.findOneAndRemove({ code: req.body.code }).then( () => {
+		console.log("code removed from db, don't use it again ..");
+                      res.redirect('/');
+             });
+         });
                                     
-                  
-    
-    
- 
-   
+
 
 
 
 // logOut  
-app.post("/logout", (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
+   app.post("/logout", (req, res, next) => {
+      req.logout(function (err) {
+        if (err) {
+          return next(err);
+       }
+         res.redirect("/");
+      });
   });
-});
 
-// Show Login Page When User Get to Home Page 
+
+ // check if user is authenticated or not when he gets home page
 function checkUserAuth(req, res, next) {
-  if (!req.isAuthenticated()) {
-    return res.redirect("/login");
-  }
-  next();
-}
+       if (!req.isAuthenticated()) {
+         return res.redirect("/login");
+      }
+        next();
+    }
+
+
+
+
 
