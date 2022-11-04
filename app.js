@@ -83,7 +83,7 @@ app.post("/login", (req, res) => {
       from: '', // sender-email,
         to: req.body.email,
           subject: 'Login Code',
-            text:  Math.floor ( Math.random () * (999999 - 100000) + 100000 ).toString()
+            text:  Math.floor ( Math.random () * (999999 - 100000) + 100000 ).toString()    // random code consisting of 6 numbers for each login
        };
     const emailDoc = new Code({
             email: mailOptions.to,
@@ -116,22 +116,19 @@ app.post("/login", (req, res) => {
 
         };
 
-       passportConfig();
+     passportConfig();
 
-       
-    app.post('/email-code', passport.authenticate('local', {
-                failureFlash: true,             
-                  failureRedirect: '/email-code',
-             }),  (req, res) => {
+ 
+  app.post('/email-code', passport.authenticate('local', {
+           failureFlash: true,             
+           ailureRedirect: '/email-code',
+     }),  (req, res) => {
        Code.findOneAndRemove({ code: req.body.code }).then( () => {
-		console.log("code removed from db, don't use it again ..");
-                      res.redirect('/');
-             });
+         console.log("code removed from db, don't use it again ..");
+             res.redirect('/');
          });
+      });
                                     
-
-
-
 
 // logOut  
    app.post("/logout", (req, res, next) => {
@@ -151,7 +148,6 @@ function checkUserAuth(req, res, next) {
       }
         next();
     }
-
 
 
 
