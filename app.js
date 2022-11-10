@@ -44,6 +44,8 @@ app.use(passport.session());
       }
     );
 
+
+
 // Routes
 app.get("/", checkUserAuth, (req, res) => {
       res.render("home");
@@ -61,12 +63,6 @@ app.get("/logout", (req, res) => {
 app.get("/email-code", (req, res) => {
   res.render("email_code");
 });
-
-
-
-
-
-
 
 
 
@@ -96,11 +92,10 @@ app.post("/login", (req, res) => {
               emailDoc.save().then( result => { res.redirect ('/email-code') })
                 .catch(error => { console.log (error) })
                    console.log('email sent :' + info.response)         
-             }
-          }); 
-      });        
+                 }
+              }); 
+           });        
     
-
 
       const passportConfig = () => {
              passport.use(
