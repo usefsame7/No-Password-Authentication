@@ -136,7 +136,7 @@ app.post("/login", (req, res) => {
   });
 
 
- // check if user is authenticated or not when he gets home page
+ // check if user is authenticated or not 
 function checkUserAuth(req, res, next) {
        if (!req.isAuthenticated()) {
          return res.redirect("/login");
